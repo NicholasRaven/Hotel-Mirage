@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function index(){
-        $hotel = Hotel::all();
+        $hotel = Hotel::paginate(4);
         return view('admin.dashboard',compact('hotel'));
     }
 
@@ -48,7 +49,6 @@ class AdminController extends Controller
 
         $data = Hotel::all();
 
-
         return view('admin.explore',compact('data'));
     }
 
@@ -83,5 +83,29 @@ class AdminController extends Controller
        $hotel->save();
 
        return redirect()->route('admin.explore')->with('success','Hotel Update Successfully');
+    }
+
+    public function manage_booking(){
+        $books = Booking::all();
+
+        return view('admin.manage_booking',compact('books'));
+    }
+
+    public function approve_book($id){
+
+        $books = Booking::findOrFail($id);
+        $books->status = 'approved';
+        $books->save();
+
+        return redirect()->back();
+    }
+
+    public function reject_book($id){
+
+        $books = Booking::findOrFail($id);
+        $books->status = 'rejected';
+        $books->save();
+
+        return redirect()->back();
     }
 }

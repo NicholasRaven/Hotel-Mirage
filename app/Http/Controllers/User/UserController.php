@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $hotel = Hotel::all();
+        $hotel = Hotel::paginate(4);
 
         return view('user.dashboard',compact('hotel'));
     }

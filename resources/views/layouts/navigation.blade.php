@@ -54,6 +54,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('booking.manage')" :active="request()->routeIs('booking.manage')">
+                        {{ __('Manage Booking List ') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('aboutus')" :active="request()->routeIs('aboutus')">
                         {{ __('About Us') }}
                     </x-nav-link>

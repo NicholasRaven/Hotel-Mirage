@@ -44,4 +44,5 @@
             @endforeach
         </div>
     </div>
+    {{ $hotel->links() }}
 </x-app-layout>

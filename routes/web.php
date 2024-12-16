@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/aboutus',[AboutUsController::class, 'index'])->name('aboutus');
@@ -41,13 +41,17 @@ Route::middleware(['auth','adminMiddleware'])->group(function(){
     Route::get('/admin/create_hotel',[AdminController::class,'create_hotel'])->name('admin.create');
     Route::post('/admin/hotels',[AdminController::class,'store'])->name('hotel.store');
 
-    Route::get('admin/view_hotel',[AdminController::class,'view_hotel'])->name('admin.explore');
+    Route::get('/admin/view_hotel',[AdminController::class,'view_hotel'])->name('admin.explore');
 
     Route::get('/admin/delete_hotel/{id}',[AdminController::class,'delete_hotel'])->name('hotel.delete');
     Route::get('/admin/update_hotel/{id}',[AdminController::class,'update_hotel'])->name('admin.update');
     Route::post('/admin/edit_hotel/{id}',[AdminController::class,'edit_hotel'])->name('hotel.update');
 
     Route::get('/admin/detail_hotel/{id}',[HomeController::class,'detail_hotel'])->name('admin.hotel.detail');
+
+    Route::get('/admin/manage_booking',[AdminController::class,'manage_booking'])->name('booking.manage');
+    Route::get('/admin/approve_book/{id}',[AdminController::class,'approve_book'])->name('approve.book');
+    Route::get('/admin/reject_book/{id}',[AdminController::class,'reject_book'])->name('reject.book');
 
 });
 
